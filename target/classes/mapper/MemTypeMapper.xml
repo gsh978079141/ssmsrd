@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.MemTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.MemType">
+        <id column="id" property="id" />
+        <result column="hid" property="hid" />
+        <result column="typename" property="typename" />
+        <result column="cardfee" property="cardfee" />
+        <result column="uppoints" property="uppoints" />
+        <result column="roomrate" property="roomrate" />
+        <result column="goodrate" property="goodrate" />
+        <result column="pointsrule" property="pointsrule" />
+        <result column="state" property="state" />
+        <result column="overdue" property="overdue" />
+        <result column="sprice" property="sprice" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hid, typename, cardfee, uppoints, roomrate, goodrate, pointsrule, state, overdue, sprice, remark
+    </sql>
+
+</mapper>

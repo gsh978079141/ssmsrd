@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.MembersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.Members">
+        <id column="id" property="id" />
+        <result column="hid" property="hid" />
+        <result column="memnum" property="memnum" />
+        <result column="memname" property="memname" />
+        <result column="mempass" property="mempass" />
+        <result column="sex" property="sex" />
+        <result column="age" property="age" />
+        <result column="tel" property="tel" />
+        <result column="area" property="area" />
+        <result column="memtype" property="memtype" />
+        <result column="idtype" property="idtype" />
+        <result column="idnum" property="idnum" />
+        <result column="birthday" property="birthday" />
+        <result column="starttime" property="starttime" />
+        <result column="endtime" property="endtime" />
+        <result column="totalmoney" property="totalmoney" />
+        <result column="leftmoney" property="leftmoney" />
+        <result column="totalpoints" property="totalpoints" />
+        <result column="usedpoints" property="usedpoints" />
+        <result column="leftpoints" property="leftpoints" />
+        <result column="badrecord" property="badrecord" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hid, memnum, memname, mempass, sex, age, tel, area, memtype, idtype, idnum, birthday, starttime, endtime, totalmoney, leftmoney, totalpoints, usedpoints, leftpoints, badrecord, state, remark
+    </sql>
+
+</mapper>

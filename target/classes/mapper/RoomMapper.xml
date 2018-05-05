@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.RoomMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.Room">
+        <id column="id" property="id" />
+        <result column="hid" property="hid" />
+        <result column="roomnum" property="roomnum" />
+        <result column="roomtype" property="roomtype" />
+        <result column="roompwd" property="roompwd" />
+        <result column="roomstate" property="roomstate" />
+        <result column="tel" property="tel" />
+        <result column="floor" property="floor" />
+        <result column="window" property="window" />
+        <result column="hourday" property="hourday" />
+        <result column="relprice" property="relprice" />
+        <result column="starttime" property="starttime" />
+        <result column="endtime" property="endtime" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hid, roomnum, roomtype, roompwd, roomstate, tel, floor, window, hourday, relprice, starttime, endtime, state, remark
+    </sql>
+
+</mapper>

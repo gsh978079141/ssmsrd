@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.UserMapper">
+    <cache
+            type="com.gsh.ssmsrd.config.MyBatisRedisCache"
+            eviction="LRU"
+            flushInterval="60000"
+            size="1024"
+            readOnly="false"
+    />
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.User">
+        <id column="id" property="id" />
+        <result column="hid" property="hid" />
+        <result column="usernum" property="usernum" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="state" property="state" />
+        <result column="tel" property="tel" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="age" property="age" />
+        <result column="birthday" property="birthday" />
+        <result column="city" property="city" />
+        <result column="salary" property="salary" />
+        <result column="starttime" property="starttime" />
+        <result column="endtime" property="endtime" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, hid, usernum, username, password, tel, state,email, sex, age, birthday, city, salary, starttime, endtime, description
+    </sql>
+
+    <select id="getUserByUserName" parameterType="string" resultType="com.gsh.ssmsrd.model.User">
+        SELECT <include refid="Base_Column_List" />FROM user WHERE username = #{username}
+    </select>
+
+</mapper>

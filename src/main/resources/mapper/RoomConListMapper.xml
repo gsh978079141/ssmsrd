@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.RoomConListMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.RoomConList">
+        <id column="id" property="id" />
+        <result column="itemname" property="itemname" />
+        <result column="itemprice" property="itemprice" />
+        <result column="amount" property="amount" />
+        <result column="paymethod" property="paymethod" />
+        <result column="totalprice" property="totalprice" />
+        <result column="payprice" property="payprice" />
+        <result column="waiter" property="waiter" />
+        <result column="bookkeeper" property="bookkeeper" />
+        <result column="consumid" property="consumid" />
+        <result column="bookitime" property="bookitime" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, itemname, itemprice, amount, paymethod, totalprice, payprice, waiter, bookkeeper, consumid, bookitime, remark
+    </sql>
+
+</mapper>

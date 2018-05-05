@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.HotelMapper">
+    <cache
+            type="com.gsh.ssmsrd.config.MyBatisRedisCache"
+            eviction="LRU"
+            flushInterval="60000"
+            size="1024"
+            readOnly="false"
+    />
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.Hotel">
+        <id column="hid" property="hid" />
+        <result column="hnum" property="hnum" />
+        <result column="hname" property="hname" />
+        <result column="hlevel" property="hlevel" />
+        <result column="hchargetel" property="hchargetel" />
+        <result column="hadress" property="hadress" />
+        <result column="haskid" property="haskid" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        hid, hnum, hname, hlevel, hchargetel, hadress, haskid, remark
+    </sql>
+    <select id="getHotelByUserId" parameterType="integer" resultType="com.gsh.ssmsrd.model.Hotel">
+        SELECT <include refid="Base_Column_List"/> FROM hotel where hid =
+        (SELECT hid FROM hotel_user where uid = #{userid})
+    </select>
+</mapper>
