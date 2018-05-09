@@ -280,6 +280,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <input type="checkbox" name="lock" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.state =='0' ? 'checked' : '' }} >
 </script>
 <script type="text/javascript" src="./component/layer-v3.0.3/layer/layui.js"></script>
+<script type="text/javascript" src="./component/layer-v3.0.3/layer/layer.js"></script>
+
 <script>
     layui.use('table', function(){
         var table = layui.table;
