@@ -122,13 +122,8 @@ public class UserControl {
 	@RequestMapping("/getlist.do")
 	@ResponseBody
 	public Map<String , Object> getList(PageInfo page ,User u,HttpSession session) throws Exception {
-
-		System.out.println("user getlist.do ....");
-		SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
-		System.out.println("info.getStringPermissions()"+info.getStringPermissions());
 		Map<String, Object> map= new HashMap<String, Object>();
-			u.setHid(1);
-//			u.setHid(Integer.parseInt(session.getAttribute("hotelId").toString()));
+			u.setHid(Integer.parseInt(session.getAttribute("hotelId").toString()));
 			Page<User> pageUser =new Page<>(page.getPage(), page.getSize());
             EntityWrapper<User> eWrapper = new EntityWrapper<User>(u);
             Page<User> userList = userService.selectPage(pageUser, eWrapper);
