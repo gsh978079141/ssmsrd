@@ -1,0 +1,11 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.gsh.ssmsrd.config.shiro.ShiroConfiguration",
+      "name": "spring.redis",
+      "type": "com.gsh.ssmsrd.config.shiro.ShiroConfiguration"
+    }
+  ],
+  "properties": []
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.LogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.Log">
+        <id column="logId" property="logId" />
+        <result column="hid" property="hid" />
+        <result column="userName" property="userName" />
+        <result column="createTime" property="createTime" />
+        <result column="content" property="content" />
+        <result column="operation" property="operation" />
+        <result column="ip" property="ip" />
+        <result column="module" property="module" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        logId, hid, userName, createTime, content, operation, ip, module
+    </sql>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsh.ssmsrd.dao.RoleMapper">
+    <cache
+            type="com.gsh.ssmsrd.config.MyBatisRedisCache"
+            eviction="LRU"
+            flushInterval="60000"
+            size="1024"
+            readOnly="false"
+    />
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gsh.ssmsrd.model.Role">
+        <id column="roleid" property="roleid" />
+        <result column="hid" property="hid" />
+        <result column="rolename" property="rolename" />
+        <result column="rolecode" property="rolecode" />
+        <result column="rolestate" property="rolestate" />
+        <result column="roledesc" property="roledesc" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        roleid, hid, rolename, rolecode, rolestate, roledesc
+    </sql>
+    <select id="listRolesByUserId" parameterType="int" resultType="com.gsh.ssmsrd.model.Role">
+        SELECT <include refid="Base_Column_List"></include> FROM role WHERE roleid =
+        (SELECT ur.roleid FROM user_role  as ur WHERE ur.userid = #{userid})
+    </select>
+
+</mapper>
