@@ -15,11 +15,11 @@
         <result column="url" property="url" />
         <result column="checked" property="checked" />
         <result column="icon" property="icon" />
-        <result column="parent_id" property="parentId" />
+        <result column="parentId" property="parentId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, url, checked, icon, parent_id AS parentId
+        id, name, url, checked, icon, parentId AS parentId
     </sql>
 </mapper>

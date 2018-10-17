@@ -12,6 +12,10 @@ import com.gsh.ssmsrd.model.Hotel;
  * @since 2018-03-22
  */
 public interface HotelService extends IService<Hotel> {
-    //根据用户Id查询所属酒店信息
-     Hotel findByUserId(Integer userid);
+    /**
+     * 
+     * @param userid
+     * @return
+     */
+    Hotel findByUserId(Integer userid);
 }

@@ -538,7 +538,7 @@ window.Win10 = {
                 top: 0,
                 'z-index': 100,
             });
-            $("#win10 .desktop").append("<div id='win10-desktop-scene' style='width: 100%;height: calc(100% - 40px);position: absolute;left: 0;top: 0; z-index: 0;background-color: transparent;'></div>")
+            $("#win10 .desktop").append("<div id='win10-desktop-scene' style='width: 100%;height: calc(100% - 40px);position: absolute;left: 0;top: 0; z-zhuce: 0;background-color: transparent;'></div>")
         }
 
         //属性绑定
@@ -761,11 +761,11 @@ window.Win10 = {
             },
         });
         $('#win10_btn_group_middle .btn.active').removeClass('active');
-        var btn = $('<div id="win10_' + index + '" index="' + index + '" class="btn show active"><div class="btn_title">' + title + '</div><div class="btn_close fa fa-close"></div></div>');
+        var btn = $('<div id="win10_' + index + '" zhuce="' + index + '" class="btn show active"><div class="btn_title">' + title + '</div><div class="btn_close fa fa-close"></div></div>');
         var layero_opened=Win10.getLayeroByIndex(index);
         layero_opened.css('z-index',Win10._countTask+813);
         Win10._settop(layero_opened);
-        layero_opened.find('.layui-layer-setwin').prepend('<a class="win10-btn-change-url" index="' + index + '" title="'+Win10.lang('修改地址','Change URL')+'" href="javascript:void(0)"><span class="fa fa-chain"></span></a><a class="win10-btn-refresh" index="' + index + '" title="'+Win10.lang('刷新','Refresh')+'" href="javascript:void(0)"><span class="fa fa-refresh"></span></a>');
+        layero_opened.find('.layui-layer-setwin').prepend('<a class="win10-btn-change-url" zhuce="' + index + '" title="'+Win10.lang('修改地址','Change URL')+'" href="javascript:void(0)"><span class="fa fa-chain"></span></a><a class="win10-btn-refresh" zhuce="' + index + '" title="'+Win10.lang('刷新','Refresh')+'" href="javascript:void(0)"><span class="fa fa-refresh"></span></a>');
         layero_opened.find('.layui-layer-setwin .layui-layer-max').click(function () {
             setTimeout(function () {
                 var height=layero_opened.css('height');

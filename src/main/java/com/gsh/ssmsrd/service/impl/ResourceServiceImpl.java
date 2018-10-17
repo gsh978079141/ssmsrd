@@ -65,7 +65,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             //获得角色权限字符串，形如：1，2，5，8，7...
             String resids = roleResource.getResids();
             //工具类字符串处理后，形如:1 2 3 5 8 7 ....
-            String resid[] = Tools.str2StrArray(resids, ",");
+            String []resid = Tools.str2StrArray(resids, ",");
             List<Integer> idlist = new ArrayList<>();
             for (String id : resid) {
                 idlist.add(Integer.parseInt(id));
@@ -81,6 +81,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         }
         return list;
     }
+
+    /**
+     * 根据菜单ID数组拼接权限菜单
+     * @param ids
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<TreeDTO> getChildrenByParentId(int[] ids) throws Exception {
         List<Resource> rlist = new ArrayList<Resource>();
@@ -102,7 +109,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             }
             //tree.setChecked(resource.getChecked());
             tree.setIconCls(resource.getIcon());
-            tree.setParent_id(resource.getParentId());
+            tree.setParentId(resource.getParentId());
             if(getChildren(resource.getId()).size() > 0){
                 tree.setState("closed");
             } else {

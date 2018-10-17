@@ -13,14 +13,14 @@ import java.util.Date;
     * @date 2018/3/20 下午8:41
     */
 public class DateUtil {
-	private final static SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
+	private final static SimpleDateFormat SDF_YEAR = new SimpleDateFormat("yyyy");
 
-	private final static SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
+	private final static SimpleDateFormat SDF_DAY = new SimpleDateFormat("yyyy-MM-dd");
 	
-	private final static SimpleDateFormat sdfDays = new SimpleDateFormat("yyyyMMdd");
+	private final static SimpleDateFormat SDF_DAYS = new SimpleDateFormat("yyyyMMdd");
 
-	private final static SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private final static SimpleDateFormat sdfTimes = new SimpleDateFormat("yyyyMMddHHmmss");
+	private final static SimpleDateFormat SDF_TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private final static SimpleDateFormat SDF_TIMES = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	/**
 	 * 获取YYYY格式
@@ -28,7 +28,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getYear() {
-		return sdfYear.format(new Date());
+		return SDF_YEAR.format(new Date());
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDay() {
-		return sdfDay.format(new Date());
+		return SDF_DAY.format(new Date());
 	}
 	
 	/**
@@ -46,13 +46,13 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDays(){
-		return sdfDays.format(new Date());
+		return SDF_DAYS.format(new Date());
 	}
 	/**
 	 *  获取YYYYMMDDHHMMSS
 	 */
 	public static String getTimes(){
-		return sdfTimes.format(new Date());
+		return SDF_TIMES.format(new Date());
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getTime() {
-		return sdfTime.format(new Date());
+		return SDF_TIME.format(new Date());
 	}
 
 	/**
@@ -182,9 +182,10 @@ public class DateUtil {
      */
     public static String getAfterDayDate(String days) {
     	int daysInt = Integer.parseInt(days);
-    	
-        Calendar canlendar = Calendar.getInstance(); // java.util包
-        canlendar.add(Calendar.DATE, daysInt); // 日期减 如果不够减会将月变动
+		// java.util包
+        Calendar canlendar = Calendar.getInstance();
+		// 日期减 如果不够减会将月变动
+        canlendar.add(Calendar.DATE, daysInt);
         Date date = canlendar.getTime();
         
         SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -200,9 +201,10 @@ public class DateUtil {
      */
     public static String getAfterDayWeek(String days) {
     	int daysInt = Integer.parseInt(days);
-    	
-        Calendar canlendar = Calendar.getInstance(); // java.util包
-        canlendar.add(Calendar.DATE, daysInt); // 日期减 如果不够减会将月变动
+		// java.util包
+        Calendar canlendar = Calendar.getInstance();
+		// 日期减 如果不够减会将月变动
+        canlendar.add(Calendar.DATE, daysInt);
         Date date = canlendar.getTime();
         
         SimpleDateFormat sdf = new SimpleDateFormat("E");

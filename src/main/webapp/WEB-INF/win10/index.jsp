@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function win10_forgive_me() {
             Win10.enableFullScreen();
             layer.alert('点击展示下一版本特性', {}, function(index){
-                var blue=$('<img src="./img/presentation/bluescreen.jpg" style="position: fixed;width: 100%;height:100%;top:0;z-index:9999999999" />');
+                var blue=$('<img src="./img/presentation/bluescreen.jpg" style="position: fixed;width: 100%;height:100%;top:0;z-zhuce:9999999999" />');
                 setTimeout(function () {
                     $('body').append(blue);
                 },3000);

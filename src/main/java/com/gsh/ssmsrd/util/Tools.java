@@ -8,7 +8,13 @@ import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+    * @Title: Tools
+    * @Package com.gsh.ssmsrd.util
+    * @Description: 工具类
+    * @author gsh
+    * @date 2018/7/10 16:00
+    */
 @SuppressWarnings("ALL")
 public class Tools {
 	
@@ -18,7 +24,8 @@ public class Tools {
 	 */
 	public static int getRandomNum(){
 		 Random r = new Random();
-		 return r.nextInt(900000)+100000;//(Math.random()*(999999-100000)+100000)
+		//(Math.random()*(999999-100000)+100000)
+		 return r.nextInt(900000)+100000;
 	}
 	
 	/**
@@ -147,7 +154,8 @@ public class Tools {
 	 * @param content  写入的内容
 	 */
 	public static void writeFile(String fileP,String content){
-		String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";	//项目路径
+		//项目路径
+		String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";
 		filePath = (filePath.trim() + fileP.trim()).substring(6).trim();
 		if(filePath.indexOf(":") != 1){
 			filePath = File.separator + filePath;
@@ -220,8 +228,10 @@ public class Tools {
 			HttpServletRequest request=null;
 			String path = request.getContextPath();
 			 basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-			//String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";	//项目路径
-			String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";	//项目路径
+			//项目路径
+			//String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";
+			//项目路径
+			String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";
 			filePath = filePath.replaceAll("file:/", "");
 			filePath = filePath.replaceAll("%20", " ");
 			filePath = filePath.trim() + fileP.trim();
@@ -231,9 +241,11 @@ public class Tools {
 			System.out.println("filepath"+basePath+fileP);
 			String encoding = "utf-8";
 			File file = new File(basePath+fileP);
-			if (file.isFile() && file.exists()) { 		// 判断文件是否存在
+			if (file.isFile() && file.exists()) {
+				// 判断文件是否存在
 				InputStreamReader read = new InputStreamReader(
-				new FileInputStream(file), encoding);	// 考虑到编码格式
+						// 考虑到编码格式
+				new FileInputStream(file), encoding);
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				while ((lineTxt = bufferedReader.readLine()) != null) {

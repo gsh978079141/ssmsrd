@@ -11,6 +11,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ import java.util.Map;
 *<p style="color:red;">Description: 登录控制类 </p>
 *<p>Company: jxxkhotel </p>
 *@author gdd
-*@date 2016-12-30 下午4:23:14
+*@date 2017-12-30 下午4:23:14
 */
 @Controller
 public class LoginControl {
@@ -34,6 +35,8 @@ public class LoginControl {
 	private RoleService roleService;
 //	@Resource
 //	private HotelUserMapper hotelUserMapper;
+
+
 	@Resource
 	private UserRoleService userRoleService;
 	@Resource
@@ -49,8 +52,9 @@ public class LoginControl {
 	 */
 	@RequestMapping("/login.do")
 	@ResponseBody
-	public Map login(User u) throws Exception{
-	    Map map=new HashMap();
+	public Map login(User u,boolean rememberMe) {
+		System.out.println("rememberMe" + rememberMe);
+		Map map=new HashMap();
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(u.getUsername(), u.getPassword());
 		try {
@@ -67,6 +71,7 @@ public class LoginControl {
 			return map;
 		}
         map.put("tip","正在登陆");
+		token.setRememberMe(rememberMe);
         map.put("token",subject.getSession().getId());
         map.put("href","jump/win10/index.do");
 		return map;
@@ -82,7 +87,7 @@ public class LoginControl {
 //		UsernamePasswordToken token = new UsernamePasswordToken(u.getUsername(),md5Pwd);
 //		try {
 //			currentUser.login(token);
-//			return "index";
+//			return "zhuce";
 //		} catch (AuthenticationException e) {//登录失败
 //			System.out.println("登录失败");
 //		}
@@ -121,30 +126,51 @@ public class LoginControl {
 //		else
 //			 map.put("msg", "error") ;
 	}
+
 	/**
-	 *
-	 *<p>Description: 安全退出</p>
+	 * 安全退出
+	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/loginout.do")
 	public String loginout(HttpSession session){
 		session.invalidate();
-		return "index";
+		return "login";
 	}
 
 	/**
-	　* @Description:
-	　* @param
-	　* @return
-	　* @throws
-	　* @author gsh
-	　* @date 2018/4/17 下午3:40
-	　*/
-	@RequestMapping("/loginin.do")
+	 *跳转登录
+	 * @return
+	 */
+	@RequestMapping("/tologin.do")
 	public String loginin(){
 		return "login";
 	}
 
+	/**
+	 * 跳转注册
+	 * @return
+	 */
+	@RequestMapping("/toreg.do")
+	public String toreg(){
+		return "zhuce";
+	}
+
+	/**
+	 * 跳转找回密码
+	 * @return
+	 */
+	@RequestMapping("/toforgetmm." +
+			"do")
+	public String toforgetmm(){
+		return "forgetmm";
+
+	}
+
+	/**
+	 * Shiro测试
+	 * @return
+	 */
 	@RequestMapping("/test.do")
 	@RequiresRoles({"admin"})
 	public String test(){
@@ -154,10 +180,5 @@ public class LoginControl {
 	}
 
 
-	@RequestMapping("/index.do")
-	public String index(){
-		//session.setAttribute("123","123");
-		return "index";
-	}
 
 }

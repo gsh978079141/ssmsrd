@@ -1,5 +1,11 @@
 package com.gsh.ssmsrd.model;
-
+/**  
+    * @Title: PageInfo
+    * @Package com.gsh.ssmsrd.model
+    * @Description: 
+    * @author gsh
+    * @date 2018/7/10 15:59
+    */
 @SuppressWarnings("ALL")
 public class PageInfo {
     private Integer page;

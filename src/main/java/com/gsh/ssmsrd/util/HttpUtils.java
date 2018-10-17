@@ -35,7 +35,7 @@
 // *<p style="color:red;">Description :身份证校验接口--工具类</p>
 // * @Company jxxkhotel
 // * @author gsh
-// * @date 2016-12-31 下午01:10:06
+// * @date 2017-12-31 下午01:10:06
 // */
 //public class HttpUtils {
 //

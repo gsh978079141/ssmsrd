@@ -114,7 +114,7 @@
 //		r.setRoomType(rt);
 //		roomService.save(r);
 //		map.put("status", "ok");
-//		map.put("message", "操作成功");
+//		map.put("message", "success");
 //		return map;
 //	}
 //

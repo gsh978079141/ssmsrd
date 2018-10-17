@@ -8,13 +8,12 @@ import com.baomidou.mybatisplus.enums.IdType;
 import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author gsh123
- * @since 2018-03-22
- */
+    * @Title: User
+    * @Package com.gsh.ssmsrd.model
+    * @Description: 用户信息类
+    * @author gsh
+    * @date 2018/7/10 16:01
+    */
 @SuppressWarnings("ALL")
 @TableName("user")
 /**

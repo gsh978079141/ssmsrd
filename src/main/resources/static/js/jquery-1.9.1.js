@@ -4620,7 +4620,7 @@ Expr = Sizzle.selectors = {
 				// advance to the next closing parenthesis
 				(excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length) ) {
 
-				// excess is a negative index
+				// excess is a negative zhuce
 				match[0] = match[0].slice( 0, excess );
 				match[2] = unquoted.slice( 0, excess );
 			}
@@ -4717,7 +4717,7 @@ Expr = Sizzle.selectors = {
 
 						// non-xml :nth-child(...) stores cache data on `parent`
 						if ( forward && useCache ) {
-							// Seek `elem` from a previously-cached index
+							// Seek `elem` from a previously-cached zhuce
 							outerCache = parent[ expando ] || (parent[ expando ] = {});
 							cache = outerCache[ type ] || [];
 							nodeIndex = cache[0] === dirruns && cache[1];
@@ -4736,7 +4736,7 @@ Expr = Sizzle.selectors = {
 								}
 							}
 
-						// Use previously-cached element index if available
+						// Use previously-cached element zhuce if available
 						} else if ( useCache && (cache = (elem[ expando ] || (elem[ expando ] = {}))[ type ]) && cache[0] === dirruns ) {
 							diff = cache[1];
 
@@ -4747,7 +4747,7 @@ Expr = Sizzle.selectors = {
 								(diff = nodeIndex = 0) || start.pop()) ) {
 
 								if ( ( ofType ? node.nodeName.toLowerCase() === name : node.nodeType === 1 ) && ++diff ) {
-									// Cache the index of each encountered element
+									// Cache the zhuce of each encountered element
 									if ( useCache ) {
 										(node[ expando ] || (node[ expando ] = {}))[ type ] = [ dirruns, diff ];
 									}
@@ -5390,7 +5390,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 						}
 					}
 
-					// Discard index placeholder values to get only actual matches
+					// Discard zhuce placeholder values to get only actual matches
 					setMatched = condense( setMatched );
 				}
 
@@ -5643,12 +5643,12 @@ jQuery.fn.extend({
 	// the matched set of elements
 	index: function( elem ) {
 
-		// No argument, return index in parent
+		// No argument, return zhuce in parent
 		if ( !elem ) {
 			return ( this[0] && this[0].parentNode ) ? this.first().prevAll().length : -1;
 		}
 
-		// index in selector
+		// zhuce in selector
 		if ( typeof elem === "string" ) {
 			return jQuery.inArray( this[0], jQuery( elem ) );
 		}
@@ -7376,7 +7376,7 @@ function buildParams( prefix, obj, traditional, add ) {
 				add( prefix, v );
 
 			} else {
-				// Item is non-scalar (array or object), encode its numeric index.
+				// Item is non-scalar (array or object), encode its numeric zhuce.
 				buildParams( prefix + "[" + ( typeof v === "object" ? i : "" ) + "]", v, traditional, add );
 			}
 		});
@@ -8831,7 +8831,7 @@ function propFilter( props, specialEasing ) {
 			delete props[ name ];
 
 			// not quite $.extend, this wont overwrite keys already present.
-			// also - reusing 'index' from above because we have the correct "name"
+			// also - reusing 'zhuce' from above because we have the correct "name"
 			for ( index in value ) {
 				if ( !( index in props ) ) {
 					props[ index ] = value[ index ];

@@ -10,9 +10,14 @@ import org.dom4j.Element;
 
 import java.io.IOException;
 
+
 /**
- * 通过短信接口发送短信
- */
+    * @Title: SmsUtil
+    * @Package com.gsh.ssmsrd.util
+    * @Description: 通过短信接口发送短信
+    * @author gsh
+    * @date 2018/7/10 16:00
+    */
 @SuppressWarnings("ALL")
 public class SmsUtil {
 
@@ -50,18 +55,19 @@ public class SmsUtil {
 		method.setRequestHeader("ContentType","application/x-www-form-urlencoded;charset=UTF-8");
 	    String content = new String(code);
 	    String account = "cf_978079141", password = "wddgsh1314.";
-	   /* String strSMS2 = Tools.readTxtFile("config/SMS2.txt");			//读取短信2配置
-		if(null != strSMS2 && !"".equals(strSMS2)){
-			String strS2[] = strSMS2.split(",gsh,");
-			if(strS2.length == 2){
-				account = strS2[0];
-				password = strS2[1];
-			}
-		}*/
+//	    String strSMS2 = Tools.readTxtFile("config/SMS2.txt");			//读取短信2配置
+//		if(null != strSMS2 && !"".equals(strSMS2)){
+//			String strS2[] = strSMS2.split(",gsh,");
+//			if(strS2.length == 2){
+//				account = strS2[0];
+//				password = strS2[1];
+//			}
+//		}
 
 		NameValuePair[] data = {//提交短信
 		    new NameValuePair("account", account),
-		    new NameValuePair("password", password), 			//密码可以使用明文密码或使用32位MD5加密
+				//密码可以使用明文密码或使用32位MD5加密
+		    new NameValuePair("password", password),
 		    new NameValuePair("mobile", mobile),
 		    new NameValuePair("content", content),
 		};
@@ -69,9 +75,9 @@ public class SmsUtil {
 		try {
 			client.executeMethod(method);
 
-			String SubmitResult =method.getResponseBodyAsString();
+			String submitResult =method.getResponseBodyAsString();
 
-			Document doc = DocumentHelper.parseText(SubmitResult);
+			Document doc = DocumentHelper.parseText(submitResult);
 			Element root = doc.getRootElement();
 
 

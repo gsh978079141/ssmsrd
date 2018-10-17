@@ -35,12 +35,12 @@
 </head>
 <body class="login" >
 <!-- S top  -->
-<%--<div class="login_logo" style="height: 80px;" >--%>
-    <%--<img src="images/logo.png" width="200px" height="80px" style="float: left"/>--%>
-    <%--<div style="padding: 0px;"><div style="padding-top: 30px;font-size: 17px;">登录</div>--%>
-        <%--<div style="font-size: 15px;margin-left: 950px;margin-bottom: 100px;"><a href="zhuce.jsp">获得账号</a> |&nbsp;| <a href="forgetmm.jsp">找回密码</a></div>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div class="login_logo" style="height: 80px;" >
+    <img src="images/logo.png" width="200px" height="80px" style="float: left"/>
+    <div style="padding: 0px;"><div style="padding-top: 30px;font-size: 17px;">登录</div>
+        <div style="font-size: 15px;margin-left: 950px;margin-bottom: 100px;"><a href="<%=basePath%>toreg.do">获得账号</a> |&nbsp;| <a href="<%=basePath%>toforgetmm.do">找回密码</a></div>
+    </div>
+</div>
 <!-- E top  -->
 <hr>
 <%--<!-- S test -->--%>
@@ -137,7 +137,7 @@
                 <div class="rem_sub" style="">
                     <!-- s 记住密码 -->
                     <div class="rem_sub_l">
-                        <input type="checkbox" name="checkbox" id="save_me"/>
+                        <input type="checkbox" name="rememberMe" id="save_me"/>
                         <label for="checkbox">记住</label>
                     </div>
                     <!-- e 记住密码 -->
@@ -178,6 +178,7 @@
                         window.location.href=data.href;
                     }
                     else{
+                        alert("test"+data);
                         alert(data.tip);
                         $("#button").val("登录");
                         //$('#drag').drag.drag_bg.css({'width': 0});
@@ -192,6 +193,6 @@
 
 </script>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"1","bdPos":"right","bdTop":"100"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-<div style="text-align: center;color:rgb(202,202,202);font-size: 13px;margin-top: 30px;" align="center">© 2017 wddgsh.com 版权所有 ICP证：苏B2-20080101</div>
+<div style="text-align: center;color:rgb(202,202,202);font-size: 13px;margin-top: 30px;" align="center">© 2017 gsh.com 版权所有 ICP证：苏B2-20080101</div>
 </body>
 </html>

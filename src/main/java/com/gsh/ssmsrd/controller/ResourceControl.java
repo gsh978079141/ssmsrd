@@ -7,6 +7,8 @@ import com.gsh.ssmsrd.model.RoleResource;
 import com.gsh.ssmsrd.service.*;
 import com.gsh.ssmsrd.util.TreeDTO;
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ import java.util.*;
 @Controller
 @RequestMapping("resource")
 public class ResourceControl {
+
+	protected static final Logger logger = LoggerFactory.getLogger(ResourceControl.class);
 	@javax.annotation.Resource
     @Lazy
 	private ResourceService resourceService;
@@ -47,8 +51,10 @@ public class ResourceControl {
 	@RequestMapping("/getMenu.do")
 	@ResponseBody
 	public List<TreeDTO> getMenu() throws Exception{
+		logger.debug("/getMenu.do");
         Integer userId=Integer.parseInt(SecurityUtils.getSubject().getSession().getAttribute("userId").toString());
         List<TreeDTO> treeList=getMenu(resourceService.findByUserId(userId),null);
+		logger.debug(String.valueOf(treeList.size()));
 //		List<TreeDTO> treeList=getMenu(getResByUid(userId),session),null);
 		return treeList;
 	}
@@ -74,7 +80,7 @@ public class ResourceControl {
         roleList.add(role);
 		List<Resource> ureslist=resourceService.findByRoles(roleList);
 		//得到所拥有的权限id的数组
-		int ids[]=new int[ureslist.size()];
+		int []ids=new int[ureslist.size()];
 		if("".equals(act)){
 			for(int i=0;i<ureslist.size();i++){
 				ids[i]=((Resource)ureslist.get(i)).getId();
@@ -93,7 +99,7 @@ public class ResourceControl {
 	 */
 	@RequestMapping("/saveupdate.do")
 	@ResponseBody
-	public Map<String, Object> saveupdate(int roleid,int arry[],HttpSession session) throws Exception{
+	public Map<String, Object> saveupdate(int roleid,int []arry,HttpSession session) throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		//声明roleresource实体
         RoleResource roleres=new RoleResource();
@@ -150,12 +156,12 @@ public class ResourceControl {
 	 * @param resids 是否为授权操作，是则不为null，否则为null
 	 * @return
 	 */
-	public TreeDTO setTree(Resource resource,int resids[]){
+	public TreeDTO setTree(Resource resource,int []resids){
 		Map<String, Object> attrs=new HashMap<String, Object>();
 		TreeDTO treeDTO=new TreeDTO();
 		//树菜单id
 		treeDTO.setId(resource.getId());
-		treeDTO.setParent_id(1);
+		treeDTO.setParentId(1);
 		//树菜单文字
 		treeDTO.setText(resource.getName());
 		//状态（是否为父节点）
@@ -196,7 +202,7 @@ public class ResourceControl {
 	 * @return 拼接好的前台树形菜单集合 treelist
 	 * @throws Exception
 	 */
-	public List<TreeDTO> getMenu(List<Resource> resources,int resids[]) throws Exception{
+	public List<TreeDTO> getMenu(List<Resource> resources,int []resids) throws Exception{
 		List<TreeDTO> treelist=new ArrayList<TreeDTO>();
 		//循环resources集合
 		for(int i=0;i<resources.size();i++){

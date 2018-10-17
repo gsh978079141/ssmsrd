@@ -2,21 +2,10 @@
   "hints": [],
   "groups": [
     {
-      "sourceType": "com.gsh.ssmsrd.config.DruidConfig$IDataSourceProperties",
-      "name": "spring.datasource",
-      "type": "com.gsh.ssmsrd.config.DruidConfig$IDataSourceProperties"
-    },
-    {
       "sourceType": "com.gsh.ssmsrd.config.shiro.ShiroConfiguration",
       "name": "spring.redis",
       "type": "com.gsh.ssmsrd.config.shiro.ShiroConfiguration"
     }
   ],
-  "properties": [
-    {
-      "sourceType": "com.gsh.ssmsrd.config.DruidConfig$IDataSourceProperties",
-      "name": "spring.datasource.filters",
-      "type": "java.lang.String"
-    }
-  ]
+  "properties": []
 }

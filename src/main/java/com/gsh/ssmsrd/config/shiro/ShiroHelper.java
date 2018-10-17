@@ -5,7 +5,13 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
-
+/**  
+    * @Title: ShiroHelper
+    * @Package com.gsh.ssmsrd.config.shiro
+    * @Description: 
+    * @author gsh
+    * @date 2018/7/10 16:00
+    */
 @SuppressWarnings("ALL")
 public class ShiroHelper {
     /**

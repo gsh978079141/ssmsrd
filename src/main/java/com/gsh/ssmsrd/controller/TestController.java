@@ -5,16 +5,23 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.gsh.ssmsrd.model.*;
 import com.gsh.ssmsrd.service.*;
 import com.gsh.ssmsrd.util.Tools;
+import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import java.util.List;
-
+/**
+    * @Title: TestController
+    * @Package com.gsh.ssmsrd.controller
+    * @Description: 测试控制器
+    * @author gsh
+    * @date 2018/7/10 16:00
+    */
 @SuppressWarnings("ALL")
 @Controller
+@RequestMapping("/test")
 public class TestController {
     @Resource
     UserService userService;
@@ -28,9 +35,11 @@ public class TestController {
     HotelService hotelService;
     @Autowired
     HotelUserService hotelUserService;
+    @Autowired
+    RedisManager redisManager;
     @RequestMapping("/user")
     @ResponseBody
-    public List Test() {
+    public List test() {
 
         List list = userService.selectList(null);
 //        pu=userService.selectPage(pu,uw);
@@ -39,7 +48,6 @@ public class TestController {
 //        list=userService.findUserByUsername("gsh");
 //        System.out.println(list.size());
 //        System.out.println(userService.findUserByUsername("gsh"));
-
         return list;
     }
 
@@ -65,7 +73,8 @@ public class TestController {
         return null;
     }
 
-    @RequestMapping("/logintest.do")
+
+    @RequestMapping("/loginTest.do")
     @ResponseBody
     public String roleres(User user){
         User u =userService.findByUserName(user.getUsername());
@@ -86,5 +95,14 @@ public class TestController {
         EntityWrapper<HotelUser> hoteluserew =new EntityWrapper<>();
         hotelew.getSqlSelect();
         return "";
+    }
+
+    @RequestMapping("/redisTest.do")
+    @ResponseBody
+    public String redisTest(){
+        String key = "redis";
+        String value = "redisManage test";
+        redisManager.set(key.getBytes(),value.getBytes());
+        return  redisManager.get(key.getBytes()).toString();
     }
 }

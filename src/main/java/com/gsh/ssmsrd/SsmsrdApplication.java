@@ -4,7 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
+/**
+    * @Title: SsmsrdApplication
+    * @Package com.gsh.ssmsrd
+    * @Description:
+    * @author gsh
+    * @date 2018/7/10 16:00
+    */
 @SuppressWarnings("ALL")
 @SpringBootApplication
 @EnableTransactionManagement

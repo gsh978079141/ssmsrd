@@ -1,10 +1,14 @@
 package com.gsh.ssmsrd.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+    * @Title: TreeDTO
+    * @Package com.gsh.ssmsrd.util
+    * @Description: 菜单封装类
+    * @author gsh
+    * @date 2018/7/10 16:01
+    */
 @SuppressWarnings("ALL")
 public class TreeDTO {
 		
@@ -12,23 +16,23 @@ public class TreeDTO {
 		private String text ;
 		private String iconCls ;
 		private int checked ;
-		private int parent_id ;
+		private int parentId;
 		private String state ;
-		private List<TreeDTO> children=new ArrayList<TreeDTO>();
-		private Map<String, Object> attributes = new HashMap<String, Object>();
+		private List<TreeDTO> children;
+		private Map<String, Object> attributes ;
 		
 		
 
 
 		public TreeDTO(int id, String text, String iconCls, int checked,
-                       int parent_id, String state, List<TreeDTO> children,
-                       Map<String, Object> attributes) {
+					   int parentId, String state, List<TreeDTO> children,
+					   Map<String, Object> attributes) {
 			super();
 			this.id = id;
 			this.text = text;
 			this.iconCls = iconCls;
 			this.checked = checked;
-			this.parent_id = parent_id;
+			this.parentId = parentId;
 			this.state = state;
 			this.children = children;
 			this.attributes = attributes;
@@ -61,11 +65,11 @@ public class TreeDTO {
 		public void setChecked(int checked) {
 			this.checked = checked;
 		}
-		public int getParent_id() {
-			return parent_id;
+		public int getParentId() {
+			return parentId;
 		}
-		public void setParent_id(int parentId) {
-			parent_id = parentId;
+		public void setParentId(int parentId) {
+			this.parentId = parentId;
 		}
 		public Map<String, Object> getAttributes() {
 			return attributes;
@@ -93,7 +97,7 @@ public class TreeDTO {
 				", text='" + text + '\'' +
 				", iconCls='" + iconCls + '\'' +
 				", checked=" + checked +
-				", parent_id=" + parent_id +
+				", parentId=" + parentId +
 				", state='" + state + '\'' +
 				", children=" + children +
 				", attributes=" + attributes +

@@ -15,7 +15,7 @@ import com.gsh.ssmsrd.util.SmsUtil;
  *<p style="color:green;">Description:基础控制器 ，主要功能（1）页面跳转 (2)数据库备份</p>
  *<p>Company: </p>
  *@author gdd
- *@date 2016-12-30 下午4:00:02
+ *@date 2017-12-30 下午4:00:02
  */
 @Controller
 @RequestMapping("jump")
@@ -50,11 +50,12 @@ public class BaseControl {
     @RequestMapping("/gettelmsg.do")
     @ResponseBody
     public Map<String, Object> sms(String tel){
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>(2);
         int randnum=(int)((Math.random()*9+1)*100000);
         String code="您的验证码是："+randnum+"。请不要把验证码泄露给其他人。";
         System.out.println(randnum);
-        SmsUtil.sendSms2(tel, code);
+//        调用发送手机验证码接口
+//        SmsUtil.sendSms2(tel, code);
         map.put("msg", "ok");
         map.put("telmsg", randnum);
         return  map;

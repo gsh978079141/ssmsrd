@@ -25,7 +25,6 @@ public class HotelUser extends Model<HotelUser> {
     private Integer uid;
     private Integer hid;
 
-
     public Integer getId() {
         return id;
     }

@@ -139,7 +139,7 @@
 								 //if(record.age > 25){
 								//	 return "background:red";
 								// }
-								 // console.info(index);
+								 // console.info(zhuce);
 								 // console.info(record);
 							} ,
 							frozenColumns:[[				//冻结列特性 ,不要与fitColumns 特性一起使用 
@@ -250,7 +250,7 @@
 								onClickRow:function(index,row){   
 						    //-------------for TEST 结合SHIFT,CTRL,ALT键实现单选或多选----------------      
 						    if(index != selectIndexs.firstSelectRowIndex && !inputFlags.isShiftDown ){    
-						        selectIndexs.firstSelectRowIndex = index; //alert('firstSelectRowIndex, sfhit = ' + index);  
+						        selectIndexs.firstSelectRowIndex = index; //alert('firstSelectRowIndex, sfhit = ' + zhuce);
 						    }             
 						    if(inputFlags.isShiftDown ) {  
 						        $('#dataListTable').datagrid('clearSelections');                  
@@ -349,7 +349,7 @@
 																	//3 给提示信息 
 																	$.messager.show({
 																		title:'提示信息!' , 
-																		msg:'操作成功!',
+																		msg:'success!',
 																		timeout:320
 																		
 																	});
@@ -390,7 +390,7 @@
 																	//3 给提示信息 
 																	$.messager.show({
 																		title:'提示信息!' , 
-																		msg:'操作成功!',
+																		msg:'success!',
 																		timeout:320
 																		
 																	});

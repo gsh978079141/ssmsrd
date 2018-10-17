@@ -22,12 +22,22 @@ import javax.annotation.Resource;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Resource
     private UserMapper userMapper;
-    //根据用户名查找用户
+
+    /**
+     * 根据用户名查找用户
+     * @param username
+     * @return
+     */
     @Override
     public  User findByUserName(String username){
         return userMapper.getUserByUserName(username);
     }
-    //根据用户ID查询角色
+
+    /**
+     * 根据用户ID查询角色
+     * @param userid
+     * @return
+     */
     @Override
     public Role findRoleByUserId(int userid) {
         return null;

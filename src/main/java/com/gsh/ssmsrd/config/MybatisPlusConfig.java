@@ -19,7 +19,13 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
-
+/**
+    * @Title: MybatisPlusConfig
+    * @Package com.gsh.ssmsrd.config
+    * @Description: Mybatis Plus 配置类
+    * @author gsh
+    * @date 2018/7/4 08:36
+    */
 @SuppressWarnings("ALL")
 @Configuration
 @MapperScan(value = {"com.gsh.ssmsrd.dao*"})
@@ -61,10 +67,12 @@ public class MybatisPlusConfig {
         if (StringUtils.hasText(this.properties.getConfigLocation())) {
             mybatisPlus.setConfigLocation(this.resourceLoader.getResource(this.properties.getConfigLocation()));
         }
+        //配置文件
         mybatisPlus.setConfiguration(properties.getConfiguration());
         if (!ObjectUtils.isEmpty(this.interceptors)) {
             mybatisPlus.setPlugins(this.interceptors);
         }
+        //缓存配置开始
         MybatisConfiguration mc = new MybatisConfiguration();
         mc.setCacheEnabled(true);
         mc.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);

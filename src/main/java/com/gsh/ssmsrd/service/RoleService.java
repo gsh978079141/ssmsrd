@@ -14,6 +14,10 @@ import java.util.List;
  * @since 2018-03-22
  */
 public interface RoleService extends IService<Role> {
-    //根据用户名查找角色信息
+    /**
+     * 根据用户名查找角色信息
+     * @param userid
+     * @return
+     */
     List<Role> findRoleByUserId(int userid);
 }

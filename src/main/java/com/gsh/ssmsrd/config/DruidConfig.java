@@ -102,8 +102,12 @@ public class DruidConfig {
             this.filters = filters;
         }
 
-        @Bean//声明其为Bean实例
-        @Primary//在同样的DataSource中，首先使用被标注的DataSource
+        /**
+         * 在同样的DataSource中，首先使用被标注的DataSource
+         * @return
+         */
+        @Bean
+        @Primary
         public DataSource dataSource() {
             DruidDataSource datasource = new DruidDataSource();
             datasource.setUrl(url);
@@ -129,8 +133,6 @@ public class DruidConfig {
             datasource.setConnectionProperties(connectionProperties);
             return datasource;
         }
-
-
     }
 
 }

@@ -13,13 +13,22 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 import java.util.*;
-
+/**
+    * @Title: MyShiroRealm
+    * @Package com.gsh.ssmsrd.config.shiro
+    * @Description: shiro  用户身份验证与权限授予
+    * @author gsh
+    * @date 2018/7/4 08:51
+    */
 @SuppressWarnings("ALL")
 public class MyShiroRealm extends AuthorizingRealm {
+    private static Logger logger = LoggerFactory.getLogger(MyShiroRealm.class);
 
     @Autowired
     @Lazy
@@ -46,11 +55,11 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(
             PrincipalCollection principals) {
-        System.out.println("用户授权");
+        logger.debug("用户授权");
         //获取当前登录输入的用户名，等价于
         // (String) principalCollection.fromRealm(getName()).iterator().next();
 //      String loginName = (String) super.getAvailablePrincipal(principalCollection);
-        //获取用户
+        // 获取用户
         User user = (User) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
         //获取用户角色信息
@@ -88,7 +97,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 //        info.setRoles(roleSet);
         info.setRoles(roleSet);
         info.setStringPermissions(permissionSet);
-        System.out.println(" MyShiro 中 info.getStringPermissions()"+info.getStringPermissions());
+        logger.debug(" MyShiro 中 info.getStringPermissions()"+info.getStringPermissions());
         return info;
     }
 
@@ -98,12 +107,14 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authcToken) throws AuthenticationException {
-        System.out.println("验证用户身份");
+        logger.debug("验证用户身份");
 //        String password = String.valueOf(token.getPassword());
         //获取输入的用户名
         UsernamePasswordToken token= (UsernamePasswordToken) authcToken;
         String username= token.getUsername();
-        if (Tools.isEmpty(username)){return null;}
+        if (Tools.isEmpty(username)){
+            return null;
+        }
         //根据用户名查找数据库
         User userInfo=userService.findByUserName(username);
         if (userInfo==null) {return  null;}

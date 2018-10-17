@@ -62,6 +62,8 @@ spring:
         max-idle: 8
         min-idle: 0
         max-active: 8
+        isRedisCache: 1  #是否使用redis缓存
+
 #Spring-session 方法 S  未验证
 #  session:
 #    store-type: redis

@@ -289,11 +289,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         table.on('checkbox(user)', function(obj){
             console.log(obj)
         });
-        //监听工具条
-        //监听 锁定
+
+        //监听 锁定按钮
         table.on('checkbox(lockDemo)', function(obj){
             layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
         });
+        //监听工具条
         table.on('tool(user)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){

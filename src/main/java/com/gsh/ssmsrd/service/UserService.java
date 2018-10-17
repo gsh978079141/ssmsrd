@@ -13,8 +13,17 @@ import com.gsh.ssmsrd.model.User;
  * @since 2018-03-22
  */
 public interface UserService extends IService<User> {
-    //根据用户名查找用户
+    /**
+     * 根据用户名查找用户
+     * @param username
+     * @return
+     */
     User findByUserName(String username);
-    //根据用户名查找角色信息
+
+    /**
+     * 根据用户名查找角色信息
+     * @param userid
+     * @return
+     */
     Role findRoleByUserId(int userid);
 }

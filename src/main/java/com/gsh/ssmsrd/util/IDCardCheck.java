@@ -13,7 +13,7 @@ import java.util.Map;
  *<p style="color:red;">Description :身份证校验工具类</p>
  * @Company jxxkhotel
  * @author gsh
- * @date 2016-12-31 下午12:40:52
+ * @date 2017-12-31 下午12:40:52
  */
 
 public class  IDCardCheck extends HttpServlet {

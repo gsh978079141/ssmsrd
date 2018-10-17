@@ -9,14 +9,14 @@
         <result column="description" property="description" />
         <result column="iconCls" property="iconCls" />
         <result column="name" property="name" />
-        <result column="parent_id" property="parentId" />
+        <result column="parentId" property="parentId" />
         <result column="principal" property="principal" />
         <result column="state" property="state" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, count, description, iconCls, name, parent_id AS parentId, principal, state
+        id, count, description, iconCls, name, parentId AS parentId, principal, state
     </sql>
 
 </mapper>

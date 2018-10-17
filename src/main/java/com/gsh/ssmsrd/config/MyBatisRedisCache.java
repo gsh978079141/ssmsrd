@@ -19,6 +19,8 @@ public class MyBatisRedisCache implements Cache {
     private static Logger logger = LoggerFactory.getLogger(MyBatisRedisCache.class);
 
 //    private Jedis redisClient = createReids();
+
+
     private RedisManager redisManager=new RedisManager();
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();

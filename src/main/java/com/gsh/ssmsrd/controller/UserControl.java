@@ -1,6 +1,7 @@
 package com.gsh.ssmsrd.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.gsh.ssmsrd.config.MyBatisRedisCache;
 import com.gsh.ssmsrd.model.*;
@@ -8,6 +9,7 @@ import com.gsh.ssmsrd.service.HotelUserService;
 import com.gsh.ssmsrd.service.RoleService;
 import com.gsh.ssmsrd.service.UserRoleService;
 import com.gsh.ssmsrd.service.UserService;
+import com.gsh.ssmsrd.util.DateUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -32,7 +34,7 @@ import java.util.Map;
 *<p>Description: 员工管理模块</p>
 *<p>Company: </p>
 *@author gdd
-*@date 2016-12-30 下午3:25:09
+*@date 2017-12-30 下午3:25:09
 */
 @Controller
 @RequestMapping("user")
@@ -46,7 +48,6 @@ public class UserControl {
 	private RoleService roleService;
 	@Resource
 	private HotelUserService hotelUserService;
-
 
 	private static Logger logger = LoggerFactory.getLogger(UserControl.class);
 	/**
@@ -74,42 +75,43 @@ public class UserControl {
 	@RequiresPermissions({"user:manage"})
 	@RequestMapping("/save.do")
 	public Map<String,String> save(User u,int roleid,HttpSession session) {
-		Map<String, String> map=new HashMap<String, String>();
-		u.setHid(Integer.parseInt(session.getAttribute("hotelId").toString()));
-			map.put("status", "ok");
-			map.put("message", "操作成功");
-			return map;
+		Map<String, String> map=new HashMap<>();
+//		u.setHid(Integer.parseInt(session.getAttribute("hotelId").toString()));
+		map.put("status", "ok");
+		map.put("message", "success");
+		return map;
 	}
 	/**
 	 * 用户注册
-	 * @param u
+	 * @param u 用户基本信息
 	 * @return
 	 */
-//	@RequestMapping("/reg.do")
-//	@ResponseBody
-//	public Map<String, String> reg(User u){
-//		Map<String, String> map=new HashMap<String, String>();
-//		u.setHid(0);
-//		u.setStarttime(DateUtil.getDay());
-//		u.setEndtime(DateUtil.getAfterDayDate("7"));
-//		this.userService.save(u);
-//		User saveu=userService.find(u).get(0);
-//		Role role=new Role();
-//		role.setRoleid(2);
-//		UserRole userrole=new UserRole();
-//		userrole.setRole(role);
-//		userrole.setUser(saveu);
-//		userRoleService.save(userrole);
-//		Hotel h=new Hotel();
-//		h.setHid(1);
-//		HotelUser hu=new HotelUser();
-//		hu.setHotel(h);
-//		hu.setUser(saveu);
-//		hotelUserService.save(hu);
-//		map.put("status", "ok");
-//		map.put("message", "操作成功");
-//		return map;
-//	}
+	@RequestMapping("/reg.do")
+	@ResponseBody
+	public Map<String, String> reg(User u){
+		Map<String, String> map=new HashMap<String, String>();
+		//默认用户酒店ID=0，代表未创建酒店
+		//设置开始时间
+		u.setStarttime(DateUtil.getDay());
+		//设置有效时间
+		u.setEndtime(DateUtil.getAfterDayDate("7"));
+		//设置酒店ID(默认为4)
+		u.setHid(4);
+		//保存用户
+//		u.setUsername();
+		userService.insert(u);
+		//用户角色操作
+		UserRole userRole=new UserRole();
+		//设置用户ID
+		userRole.setUserid(u.getId());
+		//设置角色ID(2为默认注册用户)
+		userRole.setRoleid(2);
+		//保存用户与权限对应关系
+		userRoleService.insert(userRole);
+		map.put("status", "ok");
+		map.put("message", "success");
+		return map;
+	}
 
 	/**
 	 * 得到用户信息列表
@@ -142,7 +144,7 @@ public class UserControl {
 	@RequestMapping("/update.do")
 	@ResponseBody
 	public String update(User u,Integer roleid,HttpSession session) {
-		return  "{\"status\":\"提示\" , \"message\":\"操作成功!\"}";
+		return  "{\"status\":\"提示\" , \"message\":\"success!\"}";
 	}
 
 	/**
@@ -161,19 +163,29 @@ public class UserControl {
 			}
 		return null;
 	}
-//	@RequestMapping("/checkname.do")
-//	@ResponseBody
-//	public Map<String, String> checkname(String username){
-//		System.out.println("username="+username);
-//		Map<String, String> map=new HashMap<String, String>();
-//		int num= userService.find("from User as u where u.username ="+"'"+username+"'").size();
-//		System.out.println("num="+num);
-//		if(num==0)
-//			map.put("msg", "ok");
-//		else
-//			map.put("msg", "no");
-//		return map;
-//	}
+
+	/**
+	 * 验证用户名是否存在
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping("/checkname.do")
+	@ResponseBody
+	public Map<String, String> checkname(String username){
+		Map<String, String> map=new HashMap<String, String>();
+		User user=new User();
+		EntityWrapper ew =new EntityWrapper();
+		user.setUsername(username);
+		ew.setEntity(user);
+		int count=userService.selectCount(ew);
+		if(count==0) {
+			map.put("msg", "ok");
+		}
+		else {
+			map.put("msg", "no");
+		}
+		return map;
+	}
 
 	/**
 	 *

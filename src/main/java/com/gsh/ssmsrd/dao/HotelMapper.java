@@ -12,6 +12,10 @@ import com.gsh.ssmsrd.model.Hotel;
  * @since 2018-03-22
  */
 public interface HotelMapper extends BaseMapper<Hotel> {
-    //根据用户Id查询所属酒店信息
+    /**
+     * 根据用户ID查询酒店
+     * @param userid
+     * @return
+     */
      Hotel getHotelByUserId(Integer userid);
 }

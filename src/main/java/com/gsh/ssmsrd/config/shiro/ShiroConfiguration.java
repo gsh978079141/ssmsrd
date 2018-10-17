@@ -8,6 +8,7 @@ import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -20,7 +21,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.data.redis.config.annotation.web.server.RedisWebSessionConfiguration;
-
+/**  
+    * @Title: ShiroConfiguration
+    * @Package com.gsh.ssmsrd.config.shiro
+    * @Description: 
+    * @author gsh
+    * @date 2018/7/10 15:59
+    */
 @SuppressWarnings("ALL")
 @Configuration
 @ConfigurationProperties(prefix = "spring.redis")
@@ -85,8 +92,10 @@ public class ShiroConfiguration {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        //散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        //散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
     }
 
@@ -96,6 +105,8 @@ public class ShiroConfiguration {
             dwsm.setRealm(getShiroRealm());
             // 自定义缓存实现 使用redis
             dwsm.setCacheManager(cacheManager());
+            //记住我功能
+            dwsm.setRememberMeManager(cookieRememberMeManager());
             // 自定义session管理 使用redis
             dwsm.setSessionManager(sessionManager());
         //        dwsm.setCacheManager(getEhCacheManager());
@@ -111,6 +122,7 @@ public class ShiroConfiguration {
         aasa.setSecurityManager(getDefaultWebSecurityManager());
         return new AuthorizationAttributeSourceAdvisor();
     }
+    //templates/public4/assets/css/base.css
     /**
         * @Title: ShiroFilterFactoryBean
         * @Description:* 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
@@ -135,8 +147,14 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/component/**", "anon");
         filterChainDefinitionMap.put("/**.html","anon");
+        filterChainDefinitionMap.put("/to*.do","anon");
+        filterChainDefinitionMap.put("/jump/*.do","anon");
+        filterChainDefinitionMap.put("/test/*","anon");
+        filterChainDefinitionMap.put("/user/checkname.do","anon");
+        filterChainDefinitionMap.put("/user/reg.do","anon");
         filterChainDefinitionMap.put("/login.do","anon");
-        // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
+
+        // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:
         //自定义加载权限资源关系
 //        List<Resources> resourcesList = resourcesService.queryAll();
 //        for(Resources resources:resourcesList){
@@ -149,9 +167,9 @@ public class ShiroConfiguration {
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/**", "authc");
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/loginin.do");
+        shiroFilterFactoryBean.setLoginUrl("/tologin.do");
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index.do");
+        shiroFilterFactoryBean.setSuccessUrl("/jump/win10/index.do");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -167,7 +185,8 @@ public class ShiroConfiguration {
             RedisManager redisManager = new RedisManager();
             redisManager.setHost(host);
             redisManager.setPort(port);
-            redisManager.setExpire(1800);// 配置缓存过期时间
+            // 配置缓存过期时间
+            redisManager.setExpire(1800);
             redisManager.setTimeout(timeout);
             // redisManager.setPassword(password);
             return redisManager;
@@ -200,9 +219,12 @@ public class ShiroConfiguration {
             DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
             sessionManager.setCacheManager(cacheManager());
             sessionManager.setSessionDAO(redisSessionDAO());
-            sessionManager.setGlobalSessionTimeout(3600000);// 设置全局session超时时间
-            sessionManager.setSessionValidationSchedulerEnabled(true);// 是否定时检查session
-            sessionManager.setDeleteInvalidSessions(true);//删除过期session
+            // 设置全局session超时时间
+            sessionManager.setGlobalSessionTimeout(3600000);
+            // 是否定时检查session
+            sessionManager.setSessionValidationSchedulerEnabled(true);
+            //删除过期session
+            sessionManager.setDeleteInvalidSessions(true);
             sessionManager.setSessionIdCookieEnabled(true);
             return sessionManager;
         }
@@ -218,8 +240,16 @@ public class ShiroConfiguration {
     public SimpleCookie getRememberMeCookie() {
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
         simpleCookie.setHttpOnly(true);
-        simpleCookie.setMaxAge(2592000);//30天
+        //30天
+        simpleCookie.setMaxAge(2592000);
         return simpleCookie;
+    }
+
+    @Bean(name = "cookieRememberMeManager")
+    public CookieRememberMeManager cookieRememberMeManager(){
+        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        cookieRememberMeManager.setCookie(getRememberMeCookie());
+        return  cookieRememberMeManager;
     }
 
 }
